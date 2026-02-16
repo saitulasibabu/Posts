@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# ----------------------------------------------------------------------------
+# Maven Wrapper
+#
+# Generated script to run Maven without a local Maven installation.
+# ----------------------------------------------------------------------------
+set -e
+
+PRG="$0"
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '/.*' > /dev/null; then
+    PRG="$link"
+  else
+    PRG=`dirname "$PRG"`"/$link"
+  fi
+done
+
+PRGDIR=`dirname "$PRG"`
+export MAVEN_PROJECTBASEDIR=`cd "$PRGDIR" >/dev/null; pwd`
+
+MVNW_DIR="$MAVEN_PROJECTBASEDIR/.mvn/wrapper"
+MVNW_JAR="$MVNW_DIR/maven-wrapper.jar"
+
+if [ ! -f "$MVNW_JAR" ]; then
+  echo "Downloading the Maven Wrapper jar..."
+  if command -v curl >/dev/null 2>&1; then
+    mkdir -p "$MVNW_DIR"
+    curl -sSf -o "$MVNW_JAR" https://repo1.maven.org/maven2/io/takari/maven-wrapper/0.5.6/maven-wrapper-0.5.6.jar || {
+      echo "Failed to download maven-wrapper.jar" >&2
+      exit 1
+    }
+  elif command -v wget >/dev/null 2>&1; then
+    mkdir -p "$MVNW_DIR"
+    wget -q -O "$MVNW_JAR" https://repo1.maven.org/maven2/io/takari/maven-wrapper/0.5.6/maven-wrapper-0.5.6.jar || {
+      echo "Failed to download maven-wrapper.jar" >&2
+      exit 1
+    }
+  else
+    echo "Neither curl nor wget is available to download the Maven Wrapper jar." >&2
+    exit 1
+  fi
+fi
+
+java -jar "$MVNW_JAR" "$@"
